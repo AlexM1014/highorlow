@@ -6,6 +6,8 @@ using UnityEngine;
 public class Deck : MonoBehaviour
 {
     public List<Card> cards;
+    public List<String> cardNames;
+    public List<int> cardValues;
     public List<Card> discardPile;
 
     public List<Sprite> spadeSprites;
@@ -34,7 +36,12 @@ public class Deck : MonoBehaviour
             {
                 //to do
                 //add in a sprite the card needs
-                cards.Add(new Card(suits, value));
+                Card tempCard = new Card(suits, value);
+                cards.Add(tempCard);
+
+                cardNames.Add(tempCard.cardSuit + " " + value);
+                //cards.Add(new Card(suits, value));
+                
             }
         }
     }

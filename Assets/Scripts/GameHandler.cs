@@ -1,6 +1,8 @@
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class GameHandler : MonoBehaviour
 {
@@ -30,6 +32,8 @@ public class GameHandler : MonoBehaviour
         rightSuit = rightCard.cardSuit.ToString();
         rightValue = rightCard.numValue;
 
+        Debug.Log(leftCard.cardSuit + " " + leftCard.numValue);
+        Debug.Log(rightCard.cardSuit + " " + rightCard.numValue);
 
         gameDeck.GenerateCardImage(leftCard);
         gameDeck.GenerateCardImage(rightCard);
@@ -41,16 +45,5 @@ public class GameHandler : MonoBehaviour
     {
         leftCardSprite.sprite = leftCard.image;
         rightCardSprite.sprite = rightCard.image;
-    }
-
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
