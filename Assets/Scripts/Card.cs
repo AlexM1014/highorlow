@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Card : MonoBehaviour
@@ -13,13 +14,13 @@ public class Card : MonoBehaviour
     public int numValue;
     public Sprite image;
     public Suit cardSuit;
+    public int tieValue;
 
     public Card(int suit, int numValue)
     {
         cardSuit = (Suit)suit;
         this.numValue = numValue;
-
-        Debug.Log("Suit:" + cardSuit + " , Value:" + numValue);
+        tieValue = suit + numValue;
     }
 
 

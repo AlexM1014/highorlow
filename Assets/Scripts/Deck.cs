@@ -6,49 +6,86 @@ using UnityEngine;
 public class Deck : MonoBehaviour
 {
     public List<Card> cards;
-    int index = 0;
+    public List<Card> discardPile;
 
-    void Start()
-    {
-        
-    }
+    public List<Sprite> spadeSprites;
+    public List<Sprite> clubSprites;
+    public List<Sprite> heartSprites;
+    public List<Sprite> diamondSprites;
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            makeDeck();
+            generateDeck();
         }
-
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-           GoDownDeck();
+           
         }
     }
 
-    public void makeDeck()
+    public void generateDeck()
     {
-        for (int s = 0; s < 4; s++)
+        for (int suits = 0; suits < 4; suits++)
         {
-            for (int n = 1; n <= 13; n++)
+            for (int value = 1; value <= 13; value++)
             {
-                cards.Add(new Card(s, n));
+                //to do
+                //add in a sprite the card needs
+                cards.Add(new Card(suits, value));
             }
         }
-
-        Debug.Log("Test Grab: " + cards[24].cardSuit + " Value:" + cards[24].numValue);
-        Debug.Log("Test Grab: " + cards[12].cardSuit + " Value:" + cards[12].numValue);
-        Debug.Log("Test Grab: " + cards[3].cardSuit + " Value:" + cards[3].numValue);
     }
 
-    public void GoDownDeck()
+    public void Draw(out Card LeftCard, out Card RightCard)
     {
+        if (cards.Count > 0)
+        {
 
-        Debug.Log("Test Grab: " + cards[index].cardSuit + " Value:" + cards[index].numValue);
-        index++;
+            int randomCard = UnityEngine.Random.Range(0, cards.Count);
+
+            //Left Card
+            LeftCard = cards[randomCard];
+            discardPile.Add(LeftCard);
+            cards.Remove(cards[randomCard]);
+
+            //Right Card
+            randomCard = UnityEngine.Random.Range(0, cards.Count);
+
+            RightCard = cards[randomCard];
+            discardPile.Add(RightCard);
+            cards.Remove(cards[randomCard]);
+        }
+
+        else
+        {
+            LeftCard = null;
+            RightCard = null;
+        }
     }
 
-
+    public void GenerateCardImage(Card card)
+    {
+        switch (card.cardSuit)
+        {
+            case Card.Suit.SPADES:
+                card.image = spadeSprites[card.numValue];
+                break;
+            case Card.Suit.HEARTS:
+                card.image = heartSprites[card.numValue];
+                break;
+            case Card.Suit.DIAMONDS:
+                card.image = diamondSprites[card.numValue];
+                break;
+            case Card.Suit.CLUBS:
+                card.image = clubSprites[card.numValue];
+                break;
+            default:
+                break;
+        }
+    }
 }
+
+
