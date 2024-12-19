@@ -22,10 +22,16 @@ public class GameHandler : MonoBehaviour
 
     public void DrawPressed()
     {
-        gameDeck.Draw(out leftCard, out rightCard);
+        if(gameDeck.cards.Count > 0) 
+        {
+            gameDeck.Draw(out leftCard);
+            gameDeck.Draw(out rightCard);
+        }
+      
         leftSuit = leftCard.cardSuit.ToString();
         leftValue = leftCard.numValue;
 
+        
         rightSuit = rightCard.cardSuit.ToString();
         rightValue = rightCard.numValue;
 

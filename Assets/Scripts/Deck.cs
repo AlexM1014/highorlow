@@ -1,7 +1,9 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class Deck : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class Deck : MonoBehaviour
     public List<Card> discardPile;
     public List<string> discardedCardNames;
 
+
+    public int randNumber;
+    public string currentCardName;
 
     public List<Sprite> spadeSprites;
     public List<Sprite> clubSprites;
@@ -26,7 +31,7 @@ public class Deck : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-           
+
         }
     }
 
@@ -42,40 +47,42 @@ public class Deck : MonoBehaviour
             }
         }
 
-        foreach(Card card in cards)
+        foreach (Card card in cards)
         {
-            cardNames.Add(card.cardSuit.ToString() + card.numValue);
+            cardNames.Add(card.cardName);
         }
     }
 
-    public void Draw(out Card LeftCard, out Card RightCard)
+    public void Draw(out Card CurrentCard)
     {
-        if (cards.Count > 0)
+        //int randomNumber = UnityEngine.Random.Range(0, cards.Count);
+
+        // = cards[randomNumber];
+        //cards.RemoveAt(randomNumber);
+        if (cards.Count >= 0)
         {
+            //it is drawing the same card twice for some reason rather than deleting it??
+            //int randCard = UnityEngine.Random.Range(0, cards.Count);
+            int randNumber = UnityEngine.Random.Range(0, cards.Count);
+            CurrentCard = cards[randNumber];
 
-            int randomCard = UnityEngine.Random.Range(0, cards.Count);
+            //Check if the CurrentCard is already in the discardPile
+            DuplicateCheck(CurrentCard.cardName);
+            currentCardName = CurrentCard.cardName;
 
-            //Left Card
-            LeftCard = cards[randomCard];
-            discardedCardNames.Add(LeftCard.cardName);
-            discardPile.Add(LeftCard);
-            cards.Remove(LeftCard);
-            cardNames.Remove(LeftCard.cardName);
+            //Add in drawn card to discardPile
+            discardPile.Add(CurrentCard);
+            discardedCardNames.Add(CurrentCard.cardName);
 
 
-            //Right Card
-            randomCard = UnityEngine.Random.Range(0, cards.Count);
-            RightCard = cards[randomCard];
-            discardedCardNames.Add(RightCard.cardName);
-            discardPile.Add(RightCard);
-            cards.Remove(RightCard);
-            cardNames.Remove(RightCard.cardName);
+            cards.RemoveAt(randNumber);
+            cardNames.Remove(cardNames[randNumber]);
         }
 
         else
         {
-            LeftCard = null;
-            RightCard = null;
+            Debug.Log("Deck is empty. Game Over");
+            CurrentCard = null;
         }
     }
 
@@ -84,19 +91,30 @@ public class Deck : MonoBehaviour
         switch (card.cardSuit)
         {
             case Card.Suit.SPADES:
-                card.image = spadeSprites[card.numValue-1];
+                card.image = spadeSprites[card.numValue - 1];
                 break;
             case Card.Suit.HEARTS:
-                card.image = heartSprites[card.numValue-1];
+                card.image = heartSprites[card.numValue - 1];
                 break;
             case Card.Suit.DIAMONDS:
-                card.image = diamondSprites[card.numValue-1];
+                card.image = diamondSprites[card.numValue - 1];
                 break;
             case Card.Suit.CLUBS:
-                card.image = clubSprites[card.numValue-1];
+                card.image = clubSprites[card.numValue - 1];
                 break;
             default:
                 break;
+        }
+    }
+
+    public void DuplicateCheck(string nameBeingChecked)
+    {
+        foreach (Card card in discardPile)
+        {
+            if (nameBeingChecked.Equals(card.cardName))
+            {
+                Debug.Log("Duplicate Found!");
+            }
         }
     }
 
