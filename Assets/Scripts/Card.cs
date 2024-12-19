@@ -5,10 +5,10 @@ public class Card : MonoBehaviour
 {
     public enum Suit
     {
-        SPADES, //1
-        HEARTS, //2
-        DIAMONDS, // 3
-        CLUBS // 4
+        CLUBS, //1
+        DIAMONDS, //2
+        HEARTS, // 3
+        SPADES // 4
     }
 
     public Suit cardSuit;

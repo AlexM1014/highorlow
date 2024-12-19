@@ -55,14 +55,9 @@ public class Deck : MonoBehaviour
 
     public void Draw(out Card CurrentCard)
     {
-        //int randomNumber = UnityEngine.Random.Range(0, cards.Count);
 
-        // = cards[randomNumber];
-        //cards.RemoveAt(randomNumber);
         if (cards.Count >= 0)
         {
-            //it is drawing the same card twice for some reason rather than deleting it??
-            //int randCard = UnityEngine.Random.Range(0, cards.Count);
             int randNumber = UnityEngine.Random.Range(0, cards.Count);
             CurrentCard = cards[randNumber];
 
@@ -74,9 +69,8 @@ public class Deck : MonoBehaviour
             discardPile.Add(CurrentCard);
             discardedCardNames.Add(CurrentCard.cardName);
 
-
             cards.RemoveAt(randNumber);
-            cardNames.Remove(cardNames[randNumber]);
+            cardNames.RemoveAt(randNumber);
         }
 
         else

@@ -1,9 +1,18 @@
+using System;
 using System.Diagnostics.Contracts;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
 {
+    public enum State
+    {
+        START,
+        PLAYINGGAME,
+        END
+    }
+
     public Deck gameDeck;
     public Card leftCard;
     public Card rightCard;
@@ -11,14 +20,15 @@ public class GameHandler : MonoBehaviour
     public Image leftCardSprite;
     public Image rightCardSprite;
 
-    //visualize cards in inspector
-    //left
-    public string leftSuit;
-    public int leftValue;
+    public bool leftCardHigher;
+    public bool answer;
 
-    //righnt
-    public string rightSuit;
-    public int rightValue;
+    public State gameState;
+
+    public void Start()
+    {
+        gameState = State.START;
+    }
 
     public void DrawPressed()
     {
@@ -26,19 +36,18 @@ public class GameHandler : MonoBehaviour
         {
             gameDeck.Draw(out leftCard);
             gameDeck.Draw(out rightCard);
+
+            gameDeck.GenerateCardImage(leftCard);
+            gameDeck.GenerateCardImage(rightCard);
+
+            DisplayCards();
+            CompareValues();
         }
-      
-        leftSuit = leftCard.cardSuit.ToString();
-        leftValue = leftCard.numValue;
 
-        
-        rightSuit = rightCard.cardSuit.ToString();
-        rightValue = rightCard.numValue;
+        else
+        {
 
-        gameDeck.GenerateCardImage(leftCard);
-        gameDeck.GenerateCardImage(rightCard);
-
-        DisplayCards();
+        }
     }
 
 
@@ -49,14 +58,69 @@ public class GameHandler : MonoBehaviour
         rightCardSprite.sprite = rightCard.image;
     }
 
-    void Start()
+    public void RightHigherPressed()
     {
-        
+        if(leftCardHigher)
+        {
+            answer = false;
+        }
+
+        else
+        {
+            answer = true;
+        }
+
+        ApplyPoints(answer);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RightLowerPressed()
     {
-        
+        if(leftCardHigher)
+        {
+            answer = true;
+        }
+        else
+        {
+            answer = false;
+        }
+
+        ApplyPoints(answer);
     }
+
+    private void ApplyPoints(bool playerAnswer)
+    {
+        if(playerAnswer)
+        {
+            Debug.Log("Correct!");
+        }
+        else
+        {
+            Debug.Log("Wrong!");
+        }
+    }
+
+    public void CompareValues()
+    {
+        if (leftCard.numValue > rightCard.numValue)
+        {
+            leftCardHigher = true;
+        }
+        else if(leftCard.numValue == rightCard.numValue)
+        {
+            if(leftCard.tieValue > rightCard.tieValue)
+            {
+                leftCardHigher = true;
+            }
+            else
+            {
+                leftCardHigher = false;
+            }
+        }
+        else
+        {
+            leftCardHigher = false;
+        }
+
+    }
+
 }
