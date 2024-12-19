@@ -6,7 +6,11 @@ using UnityEngine;
 public class Deck : MonoBehaviour
 {
     public List<Card> cards;
+    public List<string> cardNames;
+
     public List<Card> discardPile;
+    public List<string> discardedCardNames;
+
 
     public List<Sprite> spadeSprites;
     public List<Sprite> clubSprites;
@@ -28,7 +32,7 @@ public class Deck : MonoBehaviour
 
     public void generateDeck()
     {
-        for (int suits = 0; suits < 4; suits++)
+        for (int suits = 0; suits <= 3; suits++)
         {
             for (int value = 1; value <= 13; value++)
             {
@@ -36,6 +40,11 @@ public class Deck : MonoBehaviour
                 //add in a sprite the card needs
                 cards.Add(new Card(suits, value));
             }
+        }
+
+        foreach(Card card in cards)
+        {
+            cardNames.Add(card.cardSuit.ToString() + card.numValue);
         }
     }
 
@@ -48,15 +57,19 @@ public class Deck : MonoBehaviour
 
             //Left Card
             LeftCard = cards[randomCard];
+            discardedCardNames.Add(LeftCard.cardName);
             discardPile.Add(LeftCard);
-            cards.Remove(cards[randomCard]);
+            cards.Remove(LeftCard);
+            cardNames.Remove(LeftCard.cardName);
+
 
             //Right Card
             randomCard = UnityEngine.Random.Range(0, cards.Count);
-
             RightCard = cards[randomCard];
+            discardedCardNames.Add(RightCard.cardName);
             discardPile.Add(RightCard);
-            cards.Remove(cards[randomCard]);
+            cards.Remove(RightCard);
+            cardNames.Remove(RightCard.cardName);
         }
 
         else
@@ -71,20 +84,25 @@ public class Deck : MonoBehaviour
         switch (card.cardSuit)
         {
             case Card.Suit.SPADES:
-                card.image = spadeSprites[card.numValue];
+                card.image = spadeSprites[card.numValue-1];
                 break;
             case Card.Suit.HEARTS:
-                card.image = heartSprites[card.numValue];
+                card.image = heartSprites[card.numValue-1];
                 break;
             case Card.Suit.DIAMONDS:
-                card.image = diamondSprites[card.numValue];
+                card.image = diamondSprites[card.numValue-1];
                 break;
             case Card.Suit.CLUBS:
-                card.image = clubSprites[card.numValue];
+                card.image = clubSprites[card.numValue-1];
                 break;
             default:
                 break;
         }
+    }
+
+    public List<Card> getCardList()
+    {
+        return cards;
     }
 }
 

@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
 {
-
     public Deck gameDeck;
     public Card leftCard;
     public Card rightCard;
@@ -30,12 +29,13 @@ public class GameHandler : MonoBehaviour
         rightSuit = rightCard.cardSuit.ToString();
         rightValue = rightCard.numValue;
 
-
         gameDeck.GenerateCardImage(leftCard);
         gameDeck.GenerateCardImage(rightCard);
 
         DisplayCards();
     }
+
+
 
     public void DisplayCards()
     {

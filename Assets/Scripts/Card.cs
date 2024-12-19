@@ -5,22 +5,24 @@ public class Card : MonoBehaviour
 {
     public enum Suit
     {
-        SPADES, //0
-        HEARTS, //1
-        DIAMONDS, // 2
-        CLUBS // 3
+        SPADES, //1
+        HEARTS, //2
+        DIAMONDS, // 3
+        CLUBS // 4
     }
 
-    public int numValue;
-    public Sprite image;
     public Suit cardSuit;
+    public Sprite image;
+    public int numValue;
     public int tieValue;
+    public string cardName;
 
     public Card(int suit, int numValue)
     {
         cardSuit = (Suit)suit;
         this.numValue = numValue;
         tieValue = suit + numValue;
+        cardName = cardSuit.ToString() + numValue;
     }
 
 

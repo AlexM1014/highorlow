@@ -2032,7 +2032,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cards: []
+  cardNames: []
   discardPile: []
+  discardedCardNames: []
   spadeSprites:
   - {fileID: 2373438326573010292, guid: 39363b8bfb6a05743bd10a5992af00ac, type: 3}
   - {fileID: 8169693582061937892, guid: 4613832b636c03043a64d28187f93054, type: 3}
