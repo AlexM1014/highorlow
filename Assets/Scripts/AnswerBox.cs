@@ -4,11 +4,9 @@ using UnityEngine.UI;
 
 public class AnswerBox : MonoBehaviour
 {
-
     public GameObject answerGraphic;
     public Image answerImage;
     public TextMeshProUGUI answerText;
-
 
     public void toggleBox(bool turnOn, Color inputColor)
     {

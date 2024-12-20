@@ -64,7 +64,7 @@ public class GameHandler : MonoBehaviour
             }
             else
             {
-                answerBox.toggleBox(false, Color.white);
+                answerBox.toggleBox(true, Color.red);
                 answerBox.changeBoxText("Need to answer this draw");
             }
         }
