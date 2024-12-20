@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.Contracts;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,43 +20,67 @@ public class GameHandler : MonoBehaviour
 
     public Image leftCardSprite;
     public Image rightCardSprite;
+    public GameObject rightCardBack;
+
+    public AnswerBox answerBox;
 
     public bool leftCardHigher;
     public bool answer;
+    public bool newDraw = true;
+
+    public Button higher;
+    public Button lower;
 
     public State gameState;
 
     public void Start()
     {
         gameState = State.START;
+        higher.interactable = false;
+        lower.interactable = false;
+        gameDeck.generateDeck();
     }
 
     public void DrawPressed()
     {
-        if(gameDeck.cards.Count > 0) 
+
+        if (gameDeck.cards.Count > 0) 
         {
-            gameDeck.Draw(out leftCard);
-            gameDeck.Draw(out rightCard);
+            if (newDraw)
+            {
+                newDraw = false;
+                answerBox.toggleBox(false, Color.white);
+                gameDeck.Draw(out leftCard);
+                gameDeck.Draw(out rightCard);
 
-            gameDeck.GenerateCardImage(leftCard);
-            gameDeck.GenerateCardImage(rightCard);
+                gameDeck.GenerateCardImage(leftCard);
+                gameDeck.GenerateCardImage(rightCard);
 
-            DisplayCards();
-            CompareValues();
+                DisplayCards();
+                CompareValues();
+                higher.interactable = true;
+                lower.interactable = true;
+
+            }
+            else
+            {
+                answerBox.toggleBox(false, Color.white);
+                answerBox.changeBoxText("Need to answer this draw");
+            }
         }
 
         else
         {
-
+            answerBox.toggleBox(true, Color.red);
+            answerBox.changeBoxText("Deck is empty");
         }
     }
-
-
 
     public void DisplayCards()
     {
         leftCardSprite.sprite = leftCard.image;
         rightCardSprite.sprite = rightCard.image;
+        rightCardBack.SetActive(true);
     }
 
     public void RightHigherPressed()
@@ -89,14 +114,26 @@ public class GameHandler : MonoBehaviour
 
     private void ApplyPoints(bool playerAnswer)
     {
+        rightCardBack.SetActive(false);
+        newDraw = true;
+
         if(playerAnswer)
         {
-            Debug.Log("Correct!");
+            answerBox.toggleBox(true, Color.green);
+            answerBox.changeBoxText("Correct!");
+            higher.interactable = false;
+            lower.interactable = false;
+            //Debug.Log("Correct!");
         }
         else
         {
-            Debug.Log("Wrong!");
+            answerBox.toggleBox(true, Color.red);
+            answerBox.changeBoxText("Incorrect!");
+            higher.interactable = false;
+            lower.interactable = false;
+            //Debug.Log("Wrong!");
         }
+
     }
 
     public void CompareValues()
