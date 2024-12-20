@@ -160,4 +160,9 @@ public class GameHandler : MonoBehaviour
 
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
