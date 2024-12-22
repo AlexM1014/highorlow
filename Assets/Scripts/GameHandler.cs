@@ -49,8 +49,6 @@ public class GameHandler : MonoBehaviour
             {
                 newDraw = false;
                 answerBox.toggleBox(false, Color.white);
-                //gameDeck.Draw(out leftCard);
-                //gameDeck.Draw(out rightCard);
 
                 leftCard = gameDeck.weightProb(gameDeck.cards);
                 rightCard = gameDeck.weightProb(gameDeck.cards);
@@ -62,7 +60,6 @@ public class GameHandler : MonoBehaviour
                 CompareValues();
                 higher.interactable = true;
                 lower.interactable = true;
-
             }
             else
             {

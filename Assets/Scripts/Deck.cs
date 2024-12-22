@@ -16,10 +16,6 @@ public class Deck : MonoBehaviour
 
     public Card returnedCard;
 
-
-    //float[] cars = { "Volvo", "BMW", "Ford", "Mazda" };
-
-    //public int randNumber;
     public string currentCardName;
 
     public List<Sprite> spadeSprites;
@@ -124,8 +120,6 @@ public class Deck : MonoBehaviour
 
                 cards.RemoveAt(i);
                 cardNames.RemoveAt(i);
-
-                
 
                 return returnedCard;
             }
