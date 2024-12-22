@@ -39,19 +39,20 @@ public class GameHandler : MonoBehaviour
         higher.interactable = false;
         lower.interactable = false;
         gameDeck.generateDeck();
+        Debug.Log("Probability");
+        gameDeck.generateProbability();
     }
 
     public void DrawPressed()
     {
-
         if (gameDeck.cards.Count > 0) 
         {
             if (newDraw)
             {
                 newDraw = false;
                 answerBox.toggleBox(false, Color.white);
-                gameDeck.Draw(out leftCard);
-                gameDeck.Draw(out rightCard);
+                //gameDeck.Draw(out leftCard);
+                //gameDeck.Draw(out rightCard);
 
                 gameDeck.GenerateCardImage(leftCard);
                 gameDeck.GenerateCardImage(rightCard);

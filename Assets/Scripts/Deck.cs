@@ -4,15 +4,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class Deck : MonoBehaviour
 {
+    public List<Card> aceOfSpade;
+    public List<Card> hearts;
     public List<Card> cards;
     public List<string> cardNames;
 
     public List<Card> discardPile;
     public List<string> discardedCardNames;
 
+
+    //float[] cars = { "Volvo", "BMW", "Ford", "Mazda" };
 
     public int randNumber;
     public string currentCardName;
@@ -41,43 +46,113 @@ public class Deck : MonoBehaviour
         {
             for (int value = 1; value <= 13; value++)
             {
-                //to do
-                //add in a sprite the card needs
-                cards.Add(new Card(suits, value));
+                if(suits == 1 && value == 1)
+                {
+                    aceOfSpade.Add(new Card(suits, value));
+                }
+                if(suits == 3)
+                {
+                    hearts.Add(new Card(suits,value));
+                }
+                else
+                {
+                    cards.Add(new Card(suits, value));
+                }     
             }
-        }
-
-        foreach (Card card in cards)
-        {
-            cardNames.Add(card.cardName);
         }
     }
 
-    public void Draw(out Card CurrentCard)
+    public float[] generateProbability()
     {
+        float[] probabilityNums = new float[52];
+        string output = "";
 
-        if (cards.Count >= 0)
+        for (int i = 0; i < 52; i++)
         {
-            int randNumber = UnityEngine.Random.Range(0, cards.Count);
-            CurrentCard = cards[randNumber];
+            if(i < 38)
+            {
+                probabilityNums[i] = 1;
+            }
 
-            //Check if the CurrentCard is already in the discardPile
-            DuplicateCheck(CurrentCard.cardName);
-            currentCardName = CurrentCard.cardName;
+            else if(i >= 38 && i < 51)
+            {
+                probabilityNums[i] = 2;
+            }
 
-            //Add in drawn card to discardPile
-            discardPile.Add(CurrentCard);
-            discardedCardNames.Add(CurrentCard.cardName);
+            else
+            {
+                probabilityNums[i] = 3;
+            }
 
-            cards.RemoveAt(randNumber);
-            cardNames.RemoveAt(randNumber);
+        }
+        
+        foreach(float val in probabilityNums)
+        {
+            
+
+            output += ", " + val;
         }
 
-        else
+        Debug.Log(output);
+        return probabilityNums;
+    }
+
+    /*    public void Draw(out Card CurrentCard)
         {
-            Debug.Log("Deck is empty. Game Over");
-            CurrentCard = null;
+
+            if (cards.Count >= 0)
+            {
+                int randNumber = UnityEngine.Random.Range(0, cards.Count);
+                CurrentCard = cards[randNumber];
+
+                //Check if the CurrentCard is already in the discardPile
+                DuplicateCheck(CurrentCard.cardName);
+                currentCardName = CurrentCard.cardName;
+
+                //Add in drawn card to discardPile
+                discardPile.Add(CurrentCard);
+                discardedCardNames.Add(CurrentCard.cardName);
+
+                cards.RemoveAt(randNumber);
+                cardNames.RemoveAt(randNumber);
+            }
+
+            else
+            {
+                Debug.Log("Deck is empty. Game Over");
+                CurrentCard = null;
+            }
+        }*/
+
+    float weightedDraw(float[] drawType)
+    {
+        //3 different draw types
+        //spade
+        //heart
+        //standard
+
+        float total = 0;
+
+        foreach (float drawProb in drawType)
+        {
+            total += drawProb;
         }
+
+        float randomPoint = Random.value * total;
+
+        for (int i = 0; i < drawType.Length; i++)
+        {
+            if (randomPoint < drawType[i])
+            {
+                Debug.Log("Grab " + i);
+                return i;
+            }
+            else
+            {
+                randomPoint -= drawType[i];
+            }
+        }
+        return drawType.Length - 1;
     }
 
     public void GenerateCardImage(Card card)
@@ -115,6 +190,34 @@ public class Deck : MonoBehaviour
     public List<Card> getCardList()
     {
         return cards;
+    }
+
+
+    float Choose(float[] probs)
+    {
+        float total = 0;
+
+        foreach (float cardValue in probs)
+        {
+            total += cardValue;
+        }
+
+        float randomPoint = Random.value * total;
+         
+        for (int i = 0; i < probs.Length; i++)
+        {
+           
+            if (randomPoint < probs[i])
+            {
+                return i;
+            }
+            //
+            else
+            {
+                randomPoint -= probs[i];
+            }
+        }
+        return probs.Length - 1;
     }
 }
 

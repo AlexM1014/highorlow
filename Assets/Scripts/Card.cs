@@ -5,10 +5,10 @@ public class Card : MonoBehaviour
 {
     public enum Suit
     {
-        CLUBS, //1
-        DIAMONDS, //2
-        HEARTS, // 3
-        SPADES // 4
+        CLUBS, //0
+        DIAMONDS, //1
+        HEARTS, // 2
+        SPADES // 3
     }
 
     public Suit cardSuit;
@@ -16,6 +16,7 @@ public class Card : MonoBehaviour
     public int numValue;
     public int tieValue;
     public string cardName;
+    public float drawChance;
 
     public Card(int suit, int numValue)
     {
