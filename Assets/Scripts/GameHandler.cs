@@ -39,8 +39,6 @@ public class GameHandler : MonoBehaviour
         higher.interactable = false;
         lower.interactable = false;
         gameDeck.generateDeck();
-        Debug.Log("Probability");
-        gameDeck.generateProbability();
     }
 
     public void DrawPressed()
@@ -53,6 +51,9 @@ public class GameHandler : MonoBehaviour
                 answerBox.toggleBox(false, Color.white);
                 //gameDeck.Draw(out leftCard);
                 //gameDeck.Draw(out rightCard);
+
+                leftCard = gameDeck.weightProb(gameDeck.cards);
+                rightCard = gameDeck.weightProb(gameDeck.cards);
 
                 gameDeck.GenerateCardImage(leftCard);
                 gameDeck.GenerateCardImage(rightCard);

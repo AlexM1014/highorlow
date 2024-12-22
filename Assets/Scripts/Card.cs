@@ -16,13 +16,16 @@ public class Card : MonoBehaviour
     public int numValue;
     public int tieValue;
     public string cardName;
-    public float drawChance;
+    public float prob;
 
-    public Card(int suit, int numValue)
+    public Card(int suit, int numValue, float prob)
     {
         cardSuit = (Suit)suit;
         this.numValue = numValue;
         tieValue = suit + numValue;
+
+        this.prob = prob;
+
         cardName = cardSuit.ToString() + numValue;
     }
 
