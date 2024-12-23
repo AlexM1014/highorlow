@@ -23,6 +23,7 @@ public class GameHandler : MonoBehaviour
     public GameObject rightCardBack;
 
     public AnswerBox answerBox;
+    public DeckAnimation deckAnimation;
 
     public bool leftCardHigher;
     public bool answer;
@@ -48,6 +49,7 @@ public class GameHandler : MonoBehaviour
             if (newDraw)
             {
                 newDraw = false;
+                deckAnimation.animateDraw();
                 answerBox.toggleBox(false, Color.white);
 
                 leftCard = gameDeck.weightProb(gameDeck.cards);
@@ -126,6 +128,8 @@ public class GameHandler : MonoBehaviour
             higher.interactable = false;
             lower.interactable = false;
         }
+
+        deckAnimation.animateDiscard();
 
     }
 
