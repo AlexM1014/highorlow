@@ -63,15 +63,13 @@ public class GameHandler : MonoBehaviour
             }
             else
             {
-                answerBox.toggleBox(true, Color.red);
-                answerBox.changeBoxText("Need to answer this draw");
+                answerBox.toggleAlert("You must answer this draw!");
             }
         }
 
         else
         {
-            answerBox.toggleBox(true, Color.red);
-            answerBox.changeBoxText("Deck is empty");
+            answerBox.toggleAlert("Deck empty!");
         }
     }
 
@@ -118,19 +116,15 @@ public class GameHandler : MonoBehaviour
 
         if(playerAnswer)
         {
-            answerBox.toggleBox(true, Color.green);
-            answerBox.changeBoxText("Correct!");
+            answerBox.toggleCorrect();
             higher.interactable = false;
             lower.interactable = false;
-            //Debug.Log("Correct!");
         }
         else
         {
-            answerBox.toggleBox(true, Color.red);
-            answerBox.changeBoxText("Incorrect!");
+            answerBox.toggleIncorrect();
             higher.interactable = false;
             lower.interactable = false;
-            //Debug.Log("Wrong!");
         }
 
     }

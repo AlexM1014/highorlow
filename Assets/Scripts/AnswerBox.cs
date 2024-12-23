@@ -8,6 +8,36 @@ public class AnswerBox : MonoBehaviour
     public Image answerImage;
     public TextMeshProUGUI answerText;
 
+    public Color correctColor;
+    public Color incorrectColor;
+    public Color alertColor;
+
+    public void toggleCorrect()
+    {
+        answerGraphic.SetActive(true);
+        answerImage.color = correctColor;
+        changeBoxText("Correct");
+    }
+
+    public void toggleIncorrect()
+    {
+        answerGraphic.SetActive(true);
+        answerImage.color = incorrectColor;
+        changeBoxText("Incorrect");
+    }
+
+    public void toggleAlert(string alertMessage)
+    {
+        answerGraphic.SetActive(true);
+        answerImage.color = alertColor;
+        changeBoxText(alertMessage);
+    }
+
+    public void changeBoxText(string text)
+    {
+        answerText.text = text;
+    }
+
     public void toggleBox(bool turnOn, Color inputColor)
     {
         answerGraphic.SetActive(turnOn);
@@ -17,10 +47,5 @@ public class AnswerBox : MonoBehaviour
     public void disableBox()
     {
         answerGraphic.SetActive(false);
-    }
-
-    public void changeBoxText(string text)
-    {
-        answerText.text = text;
     }
 }
