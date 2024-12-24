@@ -7,12 +7,6 @@ using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
 {
-    public enum State
-    {
-        START,
-        PLAYINGGAME,
-        END
-    }
 
     public Deck gameDeck;
     public Card leftCard;
@@ -36,7 +30,6 @@ public class GameHandler : MonoBehaviour
 
     public void Start()
     {
-        gameState = State.START;
         higher.interactable = false;
         lower.interactable = false;
         gameDeck.generateDeck();
@@ -129,7 +122,7 @@ public class GameHandler : MonoBehaviour
             lower.interactable = false;
         }
 
-        deckAnimation.animateDiscard();
+        deckAnimation.animateRightFlip();
 
     }
 

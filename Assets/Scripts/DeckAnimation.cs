@@ -7,6 +7,7 @@ public class DeckAnimation : MonoBehaviour
 
     public bool draw;
     public bool discard;
+    public GameObject discardBack;
 
     public void animateDraw()
     {
@@ -17,7 +18,27 @@ public class DeckAnimation : MonoBehaviour
     public void animateDiscard()
     {
         drawAnimator.SetBool("Discard", true);
+        drawAnimator.SetBool("Flip", false);
+        
+    }
+
+    public void ResetAnimation()
+    {
         drawAnimator.SetBool("Draw", false);
+        drawAnimator.SetBool("Discard", false);
+        drawAnimator.SetBool("Flip", false);
+    }
+
+    public void animateRightFlip()
+    {
+        drawAnimator.SetBool("Flip", true);
+        drawAnimator.SetBool("Draw", false);
+
+    }
+
+    public void discardGraphic()
+    {
+        discardBack.SetActive(true);
     }
 
 }
