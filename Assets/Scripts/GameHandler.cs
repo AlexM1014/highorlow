@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
 {
-
     public Deck gameDeck;
     public Card leftCard;
     public Card rightCard;
@@ -26,7 +25,8 @@ public class GameHandler : MonoBehaviour
     public Button higher;
     public Button lower;
 
-    public State gameState;
+    public TextMeshProUGUI pointsUI;
+    public int points;
 
     public void Start()
     {
@@ -111,6 +111,8 @@ public class GameHandler : MonoBehaviour
 
         if(playerAnswer)
         {
+            points++;
+            updatePointUI();
             answerBox.toggleCorrect();
             higher.interactable = false;
             lower.interactable = false;
@@ -123,7 +125,11 @@ public class GameHandler : MonoBehaviour
         }
 
         deckAnimation.animateRightFlip();
+    }
 
+    public void updatePointUI()
+    {
+        pointsUI.text = "Score: " + points;
     }
 
     public void CompareValues()
