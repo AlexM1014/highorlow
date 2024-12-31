@@ -9,25 +9,34 @@ using UnityEngine.UI;
 public class GameHandler : MonoBehaviour
 {
     public Deck gameDeck;
-    public Card leftCard;
-    public Card rightCard;
-              
-    public Image leftCardSprite;
-    public Image rightCardSprite;
-    public GameObject rightCardBack;
+    Card leftCard;
+    Card rightCard;
 
-    public AnswerBox answerBox;
-    public DeckAnimation deckAnimation;
 
-    public bool leftCardHigher;
-    public bool answer;
-    public bool newDraw = true;
-
+    [Header("Game Buttons")]
     public Button higher;
     public Button lower;
 
+    [Header("UI Components")]
+    public GameObject rightCardBack;
+    public Image rightCardSprite;
+    public Image leftCardSprite;
+    public AnswerBox answerBox;
     public TextMeshProUGUI pointsUI;
     public int points;
+
+    [Header("Animation")]
+    public DeckAnimation deckAnimation;
+
+    [Header("Audio")]
+    public GameAudio gameAudioHandler;
+
+    bool leftCardHigher;
+    bool answer;
+    bool newDraw = true;
+
+
+
 
     public void Start()
     {
@@ -110,12 +119,14 @@ public class GameHandler : MonoBehaviour
         {
             points++;
             updatePointUI();
+            gameAudioHandler.playResultSound(true);
             answerBox.toggleCorrect();
             higher.interactable = false;
             lower.interactable = false;
         }
         else
         {
+            gameAudioHandler.playResultSound(false);
             answerBox.toggleIncorrect();
             higher.interactable = false;
             lower.interactable = false;
