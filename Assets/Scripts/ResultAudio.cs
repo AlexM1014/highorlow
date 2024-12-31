@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameAudio : MonoBehaviour
+public class ResultAudio : MonoBehaviour
 {
     public AudioClip draw;  
     public AudioClip flip;

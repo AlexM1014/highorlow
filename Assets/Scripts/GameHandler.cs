@@ -29,14 +29,11 @@ public class GameHandler : MonoBehaviour
     public DeckAnimation deckAnimation;
 
     [Header("Audio")]
-    public GameAudio gameAudioHandler;
+    public ResultAudio gameAudioHandler;
 
     bool leftCardHigher;
     bool answer;
     bool newDraw = true;
-
-
-
 
     public void Start()
     {

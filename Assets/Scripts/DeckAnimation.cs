@@ -10,16 +10,10 @@ public class DeckAnimation : MonoBehaviour
     public GameObject discardBack;
 
     public AudioSource drawCard;
-    public AudioSource flipCard;
 
     public void drawSound()
     {
         drawCard.Play();
-    }
-
-    public void flipSound()
-    {
-       flipCard.Play();
     }
 
     public void animateDraw()
