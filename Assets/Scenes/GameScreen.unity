@@ -3203,7 +3203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -840, y: 0}
+  m_AnchoredPosition: {x: -900, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1154350337
@@ -3634,7 +3634,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 685, y: 473}
+  m_AnchoredPosition: {x: 685, y: 558}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1216576702
@@ -5734,7 +5734,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 685, y: 223}
+  m_AnchoredPosition: {x: 685, y: 308}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1697058530
@@ -7111,7 +7111,6 @@ MonoBehaviour:
   discard: 0
   discardBack: {fileID: 354163932}
   drawCard: {fileID: 2050996229}
-  flipCard: {fileID: 1869216418}
 --- !u!82 &2050996229
 AudioSource:
   m_ObjectHideFlags: 0
