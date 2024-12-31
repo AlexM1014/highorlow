@@ -53,7 +53,7 @@ public class HowToPlay : MonoBehaviour
         {
             if (scrollInt - 1 < 0)
             {
-                scrollInt = instructionPanels.Count;
+                scrollInt = instructionPanels.Count-1;
             }
             else
             {
