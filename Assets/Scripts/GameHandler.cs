@@ -134,11 +134,7 @@ public class GameHandler : MonoBehaviour
 
     public void CompareValues()
     {
-        if (leftCard.numValue > rightCard.numValue)
-        {
-            leftCardHigher = true;
-        }
-        else if(leftCard.numValue == rightCard.numValue)
+        if(leftCard.numValue == rightCard.numValue)
         {
             if(leftCard.tieValue > rightCard.tieValue)
             {
@@ -149,11 +145,16 @@ public class GameHandler : MonoBehaviour
                 leftCardHigher = false;
             }
         }
+
+        else if (leftCard.numValue > rightCard.numValue)
+        {
+            leftCardHigher = true;
+        }
+
         else
         {
             leftCardHigher = false;
         }
-
     }
 
     public void QuitGame()
