@@ -173,10 +173,6 @@ public class Deck : MonoBehaviour
     {
         return cards;
     }
-
-
-
-
 }
 
 

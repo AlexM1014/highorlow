@@ -3,6 +3,7 @@ using System.Diagnostics.Contracts;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
@@ -10,7 +11,7 @@ public class GameHandler : MonoBehaviour
     public Deck gameDeck;
     public Card leftCard;
     public Card rightCard;
-
+              
     public Image leftCardSprite;
     public Image rightCardSprite;
     public GameObject rightCardBack;
@@ -56,15 +57,11 @@ public class GameHandler : MonoBehaviour
                 higher.interactable = true;
                 lower.interactable = true;
             }
-            else
-            {
-                answerBox.toggleAlert("You must answer this draw!");
-            }
         }
 
         else
         {
-            answerBox.toggleAlert("Deck empty!");
+            answerBox.toggleReset();
         }
     }
 
@@ -155,6 +152,11 @@ public class GameHandler : MonoBehaviour
         {
             leftCardHigher = false;
         }
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void QuitGame()

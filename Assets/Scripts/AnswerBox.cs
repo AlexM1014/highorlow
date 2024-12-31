@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class AnswerBox : MonoBehaviour
 {
     public GameObject answerGraphic;
+    public GameObject resetGraphic;
     public Image answerImage;
     public TextMeshProUGUI answerText;
 
@@ -31,6 +32,11 @@ public class AnswerBox : MonoBehaviour
         answerGraphic.SetActive(true);
         answerImage.color = alertColor;
         changeBoxText(alertMessage);
+    }
+
+    public void toggleReset()
+    {
+        resetGraphic.SetActive(true);
     }
 
     public void changeBoxText(string text)
