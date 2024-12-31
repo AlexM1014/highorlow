@@ -2,32 +2,26 @@ using UnityEngine;
 
 public class GameAudio : MonoBehaviour
 {
+    public AudioClip draw;  
+    public AudioClip flip;
+    public AudioClip correct;
+    public AudioClip incorrect;
 
-    public AudioSource drawSound;
-    public AudioSource flipSound;
-    public AudioSource correct;
-    public AudioSource incorrect;
+    public AudioSource audioPlayer;
 
-    public void playDrawSound()
-    {
-        drawSound.Play();
-    }
-
-    public void playFlipSound()
-    {
-        flipSound.Play();
-    }
 
     public void playResultSound(bool correctAnswer)
     {
         if(correctAnswer)
         {
-           correct.Play();
+            audioPlayer.clip = correct;
+            audioPlayer.Play();
         }
 
         else
         {
-            incorrect.Play();
+            audioPlayer.clip = incorrect;
+            audioPlayer.Play();
         }
     }
 }

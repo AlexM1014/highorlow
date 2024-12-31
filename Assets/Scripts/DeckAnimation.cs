@@ -9,6 +9,19 @@ public class DeckAnimation : MonoBehaviour
     public bool discard;
     public GameObject discardBack;
 
+    public AudioSource drawCard;
+    public AudioSource flipCard;
+
+    public void drawSound()
+    {
+        drawCard.Play();
+    }
+
+    public void flipSound()
+    {
+       flipCard.Play();
+    }
+
     public void animateDraw()
     {
         drawAnimator.SetBool("Draw", true);
