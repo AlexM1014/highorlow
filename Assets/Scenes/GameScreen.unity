@@ -6545,6 +6545,7 @@ MonoBehaviour:
   gameDeck: {fileID: 2050996226}
   higher: {fileID: 391315575}
   lower: {fileID: 1464854328}
+  drawDeckButton: {fileID: 1243126280}
   rightCardBack: {fileID: 1359451369}
   rightCardSprite: {fileID: 2140554274}
   leftCardSprite: {fileID: 359385973}

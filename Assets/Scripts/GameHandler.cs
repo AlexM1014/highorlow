@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Diagnostics.Contracts;
 using TMPro;
 using Unity.VisualScripting;
@@ -12,10 +13,10 @@ public class GameHandler : MonoBehaviour
     Card leftCard;
     Card rightCard;
 
-
     [Header("Game Buttons")]
     public Button higher;
     public Button lower;
+    public Button drawDeckButton;
 
     [Header("UI Components")]
     public GameObject rightCardBack;
@@ -64,11 +65,6 @@ public class GameHandler : MonoBehaviour
                 lower.interactable = true;
             }
         }
-
-        else
-        {
-            answerBox.toggleReset();
-        }
     }
 
     public void DisplayCards()
@@ -99,6 +95,7 @@ public class GameHandler : MonoBehaviour
         {
             answer = true;
         }
+
         else
         {
             answer = false;
@@ -121,6 +118,7 @@ public class GameHandler : MonoBehaviour
             higher.interactable = false;
             lower.interactable = false;
         }
+
         else
         {
             gameAudioHandler.playResultSound(false);
@@ -130,6 +128,12 @@ public class GameHandler : MonoBehaviour
         }
 
         deckAnimation.animateRightFlip();
+
+        if (gameDeck.cards.Count == 0)
+        {
+            drawDeckButton.enabled= false;
+            StartCoroutine(showReset());
+        }
     }
 
     public void updatePointUI()
@@ -145,6 +149,7 @@ public class GameHandler : MonoBehaviour
             {
                 leftCardHigher = true;
             }
+
             else
             {
                 leftCardHigher = false;
@@ -170,6 +175,14 @@ public class GameHandler : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator showReset()
+    {
+        Debug.Log("Time to reset");
+        yield return new WaitForSeconds(5);
+        Debug.Log("toggleReset");
+        answerBox.toggleReset();
     }
 
 }

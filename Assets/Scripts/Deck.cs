@@ -23,37 +23,26 @@ public class Deck : MonoBehaviour
     public List<Sprite> heartSprites;
     public List<Sprite> diamondSprites;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            generateDeck();
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-
-        }
-    }
-
     public void generateDeck()
     {
         for (int suits = 0; suits <= 3; suits++)
         {
             for (int value = 1; value <= 13; value++)
             {
-                if(suits == 3  && value == 1)
+                if (suits == 3 && value == 1)
                 {
                     cards.Add(new Card(suits, value, 3));
                 }
-                else if(suits == 2)
+
+                else if (suits == 2)
                 {
-                    cards.Add(new Card(suits,value, 2));
+                    cards.Add(new Card(suits, value, 2));
                 }
+
                 else
                 {
                     cards.Add(new Card(suits, value, 1));
-                } 
+                }
             }
         }
 
@@ -63,35 +52,35 @@ public class Deck : MonoBehaviour
         }
     }
 
-        public void Draw(out Card CurrentCard)
+    public void Draw(out Card CurrentCard)
+    {
+
+        if (cards.Count >= 0)
         {
+            int randNumber = UnityEngine.Random.Range(0, cards.Count);
+            CurrentCard = cards[randNumber];
 
-            if (cards.Count >= 0)
-            {
-                int randNumber = UnityEngine.Random.Range(0, cards.Count);
-                CurrentCard = cards[randNumber];
+            //Check if the CurrentCard is already in the discardPile
+            DuplicateCheck(CurrentCard.cardName);
+            currentCardName = CurrentCard.cardName;
 
-                //Check if the CurrentCard is already in the discardPile
-                DuplicateCheck(CurrentCard.cardName);
-                currentCardName = CurrentCard.cardName;
+            //Add in drawn card to discardPile
+            discardPile.Add(CurrentCard);
 
-                //Add in drawn card to discardPile
-                discardPile.Add(CurrentCard);
-   
-                discardedCardNames.Add(CurrentCard.cardName);
+            discardedCardNames.Add(CurrentCard.cardName);
 
-                cards.RemoveAt(randNumber);
-                cardNames.RemoveAt(randNumber);
-            }
-
-            else
-            {
-                Debug.Log("Deck is empty. Game Over");
-                CurrentCard = null;
-            }
+            cards.RemoveAt(randNumber);
+            cardNames.RemoveAt(randNumber);
         }
 
-     public Card weightProb(List<Card> cardList)
+        else
+        {
+            Debug.Log("Deck is empty. Game Over");
+            CurrentCard = null;
+        }
+    }
+
+    public Card weightProb(List<Card> cardList)
     {
         float totalWeight = 0;
 
@@ -123,11 +112,13 @@ public class Deck : MonoBehaviour
 
                 return returnedCard;
             }
+
             else
             {
                 whatCard -= cardList[i].prob;
             }
         }
+
         return null;
     }
 
@@ -162,16 +153,6 @@ public class Deck : MonoBehaviour
                 Debug.Log("Duplicate Found!");
             }
         }
-    }
-
-    public void removeCards()
-    {
-       // cards.Remove()
-    }
-
-    public List<Card> getCardList()
-    {
-        return cards;
     }
 }
 

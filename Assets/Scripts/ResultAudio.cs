@@ -7,10 +7,9 @@ public class ResultAudio : MonoBehaviour
 
     public AudioSource audioPlayer;
 
-
     public void playResultSound(bool correctAnswer)
     {
-        if(correctAnswer)
+        if (correctAnswer)
         {
             audioPlayer.clip = correct;
             audioPlayer.Play();

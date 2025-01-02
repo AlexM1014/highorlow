@@ -7,19 +7,18 @@ using System.Linq;
 
 public class HowToPlay : MonoBehaviour
 {
-
     public GameObject howToPlayPanel;
     public List<GameObject> instructionPanels;
     public Button howToPlayButton;
 
     public AudioSource scrollSound;
 
-    public int scrollInt = 0;
+    int scrollInt = 0;
 
     public void openHowToPlay()
     {
         scrollSound.Play();
-        if(!howToPlayPanel.activeSelf)
+        if (!howToPlayPanel.activeSelf)
         {
             howToPlayPanel.SetActive(true);
             scrollInt = 0;
@@ -41,12 +40,13 @@ public class HowToPlay : MonoBehaviour
         scrollSound.Play();
         instructionPanels[scrollInt].SetActive(false);
 
-        if(forward)
+        if (forward)
         {
-            if(scrollInt + 1 == instructionPanels.Count)
+            if (scrollInt + 1 == instructionPanels.Count)
             {
                 scrollInt = 0;
             }
+
             else
             {
                 scrollInt += 1;
@@ -59,8 +59,9 @@ public class HowToPlay : MonoBehaviour
         {
             if (scrollInt - 1 < 0)
             {
-                scrollInt = instructionPanels.Count-1;
+                scrollInt = instructionPanels.Count - 1;
             }
+
             else
             {
                 scrollInt -= 1;
@@ -74,5 +75,4 @@ public class HowToPlay : MonoBehaviour
     {
         instructionPanels[scrollIndex].SetActive(true);
     }
-
 }

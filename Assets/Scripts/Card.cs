@@ -28,6 +28,4 @@ public class Card : MonoBehaviour
 
         cardName = cardSuit.ToString() + numValue;
     }
-
-
 }

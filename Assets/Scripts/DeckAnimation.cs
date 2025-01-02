@@ -40,12 +40,10 @@ public class DeckAnimation : MonoBehaviour
     {
         drawAnimator.SetBool("Flip", true);
         drawAnimator.SetBool("Draw", false);
-
     }
 
     public void discardGraphic()
     {
         discardBack.SetActive(true);
     }
-
 }
