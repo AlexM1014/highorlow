@@ -12,10 +12,13 @@ public class HowToPlay : MonoBehaviour
     public List<GameObject> instructionPanels;
     public Button howToPlayButton;
 
+    public AudioSource scrollSound;
+
     public int scrollInt = 0;
 
     public void openHowToPlay()
     {
+        scrollSound.Play();
         if(!howToPlayPanel.activeSelf)
         {
             howToPlayPanel.SetActive(true);
@@ -27,12 +30,15 @@ public class HowToPlay : MonoBehaviour
 
     public void closeHowToPlay()
     {
+        scrollSound.Play();
+        instructionPanels[scrollInt].SetActive(false);
         howToPlayPanel.SetActive(false);
         howToPlayButton.enabled = true;
     }
 
     public void Scroll(bool forward)
     {
+        scrollSound.Play();
         instructionPanels[scrollInt].SetActive(false);
 
         if(forward)
