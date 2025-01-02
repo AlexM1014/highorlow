@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class ResultAudio : MonoBehaviour
 {
-    public AudioClip draw;  
-    public AudioClip flip;
     public AudioClip correct;
     public AudioClip incorrect;
 
